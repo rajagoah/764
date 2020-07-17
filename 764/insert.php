@@ -1,27 +1,24 @@
-<html>
-<body>
- 
- 
 <?php
-$con = mysql_connect("localhost","root","P@ssw0rd1234");
-if (!$con)
-  {
-  die('Could not connect: ' . mysql_error());
-  }
- 
-mysql_select_db("root", $con);
- 
-$sql="INSERT INTO sampledb.nametab (fname, lname)
-VALUES
-('$_POST[fname]','$_POST[lname]')";
- 
-if (!mysql_query($sql,$con))
-  {
-  die('Error: ' . mysql_error());
-  }
-echo "1 record added";
- 
-mysql_close($con)
+//including the file to establish connection with the mysql server
+include 'mysql_db_connection.php';
+
+$conn = openConnection();
+
+
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+
+//SQL QUERY
+$sql = "INSERT INTO NAMETABLE (FNAME, LNAME) VALUES($fname, $lname)";
+
+//inserting in to the table
+if (mysqli_query($conn, $sql)  === TRUE") 
+    {
+      echo "New record created successfully";
+    } 
+else 
+    {
+      echo "Error: " ."<br>".mysqli_error($conn);
+    }
+
 ?>
-</body>
-</html>
